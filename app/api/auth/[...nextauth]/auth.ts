@@ -46,12 +46,12 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          const { data: tokenData } = await api.post<{
+          const { data: tokenUser } = await api.post<{
             access_token: string;
             refresh_token: string;
           }>(
             `/o/oauth2/token?grant_type=password&client_id=${
-              process.env.LIFERAY_URL
+              process.env.LIFERAY_CLIENT_ID
             }&username=${encodeURIComponent(
               credentials.email
             )}&password=${encodeURIComponent(credentials.password)}`,
@@ -64,24 +64,24 @@ export const authOptions: NextAuthOptions = {
             }
           );
 
-          if (tokenData.access_token) {
+          console.log("tokenUser :>> ", tokenUser);
+
+          if (tokenUser.access_token) {
             // Fetch user info using the access token
             const { data: userData } = await api.get(
-              "/api/jsonws/user/get-current-user",
+              "/o/headless-admin-user/v1.0/my-user-account",
               {
-                headers: {
-                  Authorization: `Bearer ${tokenData.access_token}`,
-                },
+                headers: { Authorization: `Bearer ${tokenUser.access_token}` },
               }
             );
             console.log("response.data", userData);
 
             return {
-              id: userData.userId.toString(),
-              name: `${userData.firstName} ${userData.lastName}`,
+              id: `${userData.id}`,
+              name: `${userData.name}`,
               email: userData.emailAddress,
-              accessToken: tokenData.access_token,
-              refreshToken: tokenData.refresh_token,
+              accessToken: tokenUser.access_token,
+              refreshToken: tokenUser.refresh_token,
             };
           }
 
