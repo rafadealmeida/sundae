@@ -1,15 +1,14 @@
 import { Inter } from 'next/font/google'
-import './globals.css'
-import { Header } from '@/components/header'
+import '@/app/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Sundae - Sistema de Gerenciamento de Tarefas',
-  description: 'Um sistema para gerenciar tarefas e projetos',
+  title: 'Login - Sundae',
+  description: 'Faça login no Sistema de Gerenciamento de Tarefas Sundae',
 }
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode
@@ -17,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <Header />
         {children}
       </body>
     </html>
