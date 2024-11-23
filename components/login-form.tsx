@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -14,7 +13,6 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,13 +23,11 @@ export default function LoginForm() {
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        callbackUrl: "/dashboard",
       });
 
       if (result?.error) {
         setError("Credenciais inválidas. Por favor, tente novamente.");
-      } else {
-        router.push("/dashboard");
       }
     } catch (error) {
       setError(
