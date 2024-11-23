@@ -1,19 +1,39 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AlertCircle } from 'lucide-react'
+import { useState, useEffect } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
-const mockProjects = ["MPA", "Sesc", "Sesc App", "Migração", "CLDF", "Projetos Internos", "SIGA", "Day Offs"]
+const mockProjects = [
+  "MPA",
+  "Sesc",
+  "Sesc App",
+  "Migração",
+  "CLDF",
+  "Projetos Internos",
+  "SIGA",
+  "Day Offs",
+];
 
 export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
-  const [selectedProject, setSelectedProject] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [categories, setCategories] = useState([])
-  const [error, setError] = useState('')
+  const [selectedProject, setSelectedProject] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categories, setCategories] = useState<string[]>([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // Aqui você normalmente buscaria as categorias do seu backend
@@ -22,34 +42,36 @@ export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
       setCategories([
         "QA",
         "Levantamento de Requisitos",
-        "Desenvolvimento",
+        "Desenvolvimento Front End",
+        "Desenvolvimento Back End",
+        "Infraestrutura",
         "Design",
-        "Testes",
+        "Testes Unitários",
         "Documentação",
         "Reunião",
-        "Planejamento"
-      ])
-    }, 1000)
-  }, [])
+        "Planejamento",
+      ]);
+    }, 1000);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!selectedProject || !selectedCategory) {
-      setError('É obrigatório selecionar um projeto e uma categoria.')
-      return
+      setError("É obrigatório selecionar um projeto e uma categoria.");
+      return;
     }
     const newProject = {
       name: selectedProject,
       role: selectedCategory,
       dateAdded: new Date().toLocaleDateString(),
-      time: {}
-    }
-    onSelectProject(newProject)
-    setSelectedProject('')
-    setSelectedCategory('')
-    setError('')
-    onClose()
-  }
+      time: {},
+    };
+    onSelectProject(newProject);
+    setSelectedProject("");
+    setSelectedCategory("");
+    setError("");
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -65,7 +87,10 @@ export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
             </Alert>
           )}
           <div className="space-y-2">
-            <label htmlFor="project" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <label
+              htmlFor="project"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
               Projeto
             </label>
             <Select onValueChange={setSelectedProject} value={selectedProject}>
@@ -74,30 +99,41 @@ export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
               </SelectTrigger>
               <SelectContent>
                 {mockProjects.map((project) => (
-                  <SelectItem key={project} value={project}>{project}</SelectItem>
+                  <SelectItem key={project} value={project}>
+                    {project}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <label htmlFor="category" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <label
+              htmlFor="category"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
               Categoria
             </label>
-            <Select onValueChange={setSelectedCategory} value={selectedCategory}>
+            <Select
+              onValueChange={setSelectedCategory}
+              value={selectedCategory}
+            >
               <SelectTrigger id="category">
                 <SelectValue placeholder="Selecione uma categoria" />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((category) => (
-                  <SelectItem key={category} value={category}>{category}</SelectItem>
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
-          <Button type="submit" className="w-full">Selecionar</Button>
+          <Button type="submit" className="w-full">
+            Selecionar
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-

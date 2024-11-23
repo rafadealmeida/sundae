@@ -1,20 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-export function AddCategoryModal({ isOpen, onClose }) {
-  const [categoryName, setCategoryName] = useState('')
+export function AddCategoryModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const [categoryName, setCategoryName] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Aqui você normalmente lidaria com a adição da categoria ao seu backend
-    console.log('Adicionando categoria:', categoryName)
-    setCategoryName('')
-    onClose()
-  }
+    console.log("Adicionando categoria:", categoryName);
+    setCategoryName("");
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -24,7 +35,10 @@ export function AddCategoryModal({ isOpen, onClose }) {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="categoryName" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            <label
+              htmlFor="categoryName"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
               Nome da Categoria
             </label>
             <Input
@@ -38,6 +52,5 @@ export function AddCategoryModal({ isOpen, onClose }) {
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
-
