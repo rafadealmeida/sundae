@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://sescportalhml.seatecnologia.com.br",
+  baseURL: process.env.LIFERAY_URL,
   headers: {
     "Accept-Language": "pt-BR,pt;q=0.9",
     "Content-Type": "application/json",
