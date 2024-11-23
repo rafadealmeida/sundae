@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-
 import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import { AvatarWithDropdown } from "./avatarWithDropdown";
 
