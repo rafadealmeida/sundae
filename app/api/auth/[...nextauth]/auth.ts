@@ -130,9 +130,6 @@ import {
   NextApiResponse,
 } from "next";
 
-// Commented out import for api
-// import { api } from "@/src/lib/api";
-
 declare module "next-auth/jwt" {
   interface JWT {
     accessToken?: string;
