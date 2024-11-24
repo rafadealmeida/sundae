@@ -1,7 +1,7 @@
 import { UserTable } from "@/components/user-table";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/auth";
-import { redirect } from "next/navigation";
+// import { getServerSession } from "next-auth/next";
+// import { authOptions } from "../../api/auth/[...nextauth]/auth";
+// import { redirect } from "next/navigation";
 
 export default async function AdminUsersPage() {
   // const session = await getServerSession(authOptions)
