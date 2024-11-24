@@ -26,6 +26,9 @@ export async function Header() {
                   <Link href="/reports" className="hover:text-gray-600">
                     Relátorios
                   </Link>
+                  <Link href="/kanban" className="hover:text-gray-600">
+                    Kanban
+                  </Link>
                 </>
               )}
             </div>
