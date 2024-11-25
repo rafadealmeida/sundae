@@ -17,17 +17,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-
-const mockProjects = [
-  "MPA",
-  "Sesc",
-  "Sesc App",
-  "Migração",
-  "CLDF",
-  "Projetos Internos",
-  "SIGA",
-  "Day Offs",
-];
+import { category, mockProjects } from "@/util/arraysMocks";
 
 export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
   const [selectedProject, setSelectedProject] = useState("");
@@ -39,18 +29,7 @@ export function SelectProjectModal({ isOpen, onClose, onSelectProject }) {
     // Aqui você normalmente buscaria as categorias do seu backend
     // Por enquanto, vamos simular isso com um atraso
     setTimeout(() => {
-      setCategories([
-        "QA",
-        "Levantamento de Requisitos",
-        "Desenvolvimento Front End",
-        "Desenvolvimento Back End",
-        "Infraestrutura",
-        "Design",
-        "Testes Unitários",
-        "Documentação",
-        "Reunião",
-        "Planejamento",
-      ]);
+      setCategories(category);
     }, 1000);
   }, []);
 
