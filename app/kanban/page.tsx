@@ -4,12 +4,14 @@
 // import { redirect } from "next/navigation"
 
 import dynamic from "next/dynamic";
+import { auth } from "../api/auth/[...nextauth]/auth";
 
-const KanbanBoard = dynamic(() => import("@/components/kanban-board"), {
+const KanbanBoard = dynamic(() => import("@/components/kanban/kanban-board"), {
   ssr: false,
 });
 
 export default async function KanbanPage() {
+  const session = await auth();
   // const session = await getServerSession(authOptions)
 
   // if (!session) {
@@ -18,8 +20,7 @@ export default async function KanbanPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Quadro Kanban</h1>
-      <KanbanBoard />
+      {session && <KanbanBoard session={session} />}
     </div>
   );
 }
