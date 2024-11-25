@@ -1,14 +1,12 @@
+import { auth } from "@/app/api/auth/[...nextauth]/auth";
 import { UserTable } from "@/components/user-table";
-// import { getServerSession } from "next-auth/next";
-// import { authOptions } from "../../api/auth/[...nextauth]/auth";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default async function AdminUsersPage() {
-  // const session = await getServerSession(authOptions)
-
-  // if (!session || session.user.role !== 'admin') {
-  //   redirect('/login')
-  // }
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
 
   return (
     <div className="container mx-auto p-4">

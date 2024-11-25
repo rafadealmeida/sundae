@@ -110,7 +110,7 @@ export function UserTable() {
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.role}</TableCell>
               <TableCell>
-                <Link href={`/admin/users/${user.id}/report`}>
+                <Link href={`/admin/users/${user.id}/calendar`}>
                   <Button variant="outline">Ver Relatório</Button>
                 </Link>
               </TableCell>
